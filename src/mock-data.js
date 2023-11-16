@@ -41,9 +41,9 @@ export const events = [
     id: '2',
     calendarId: '1',
     title: '华东的OKR沟通',
-    category: 'milestone',
-    start: addDate(today, 1),
-    end: addDate(today, 1),
+    category: 'time',
+    start: '2023-11-15 13:30',
+    end: '2023-11-15 17:30',
     isReadOnly: true,
   },
   {
