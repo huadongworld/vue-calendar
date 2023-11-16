@@ -48,7 +48,7 @@
   "scripts": {
     "lint": "eslint .",
     "develop": "vite",
-    "webp-develop": "cross-env NODE_ENV=serve webpack-dev-server --mode development --config ./config/webpack.config.js",
+    "webpack-develop": "cross-env NODE_ENV=serve webpack-dev-server --mode development --config ./config/webpack.config.js",
     "build": "rimraf dist/ && concurrently 'npm:build:*'",
     "build:modern": "vite build && vite build --mode minify",
     "build:ie11": "vite build --mode ie11 && vite build --mode ie11_minify",

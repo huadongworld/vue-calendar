@@ -128,15 +128,6 @@
   </div>
 </template>
 
-<style>
-.buttons-container {
-  text-align: right;
-}
-.buttons-container button {
-  margin-left: 10px;
-}
-</style>
-
 <script>
 /* eslint-disable no-console */
 import ToastUICalendar from './Calendar';

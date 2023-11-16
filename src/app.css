@@ -14,3 +14,10 @@
 .date-range {
   margin-left: 10px;
 }
+
+.buttons-container {
+  text-align: right;
+}
+.buttons-container button {
+  margin-left: 10px;
+}
