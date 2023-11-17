@@ -20,11 +20,14 @@
       Interviewer(1st)
     </label>
     <label>
-      <select v-model="selectedOption">
-        <option v-for="(option, index) in options" :key="index" :value="option.value">
-          {{ option.label }}
-        </option>
-      </select>
+      <el-select v-model="selectedOption" size="mini" multiple placeholder="请选择">
+        <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+        </el-option>
+      </el-select>
     </label>
     <label>
       Interviewer time
@@ -38,11 +41,14 @@
       Interviewer(2st)
     </label>
     <label>
-      <select v-model="selectedOption">
-        <option v-for="(option, index) in options" :key="index" :value="option.value">
-          {{ option.label }}
-        </option>
-      </select>
+      <el-select v-model="selectedOption" size="mini" multiple placeholder="请选择">
+        <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+        </el-option>
+      </el-select>
     </label>
     <label>
       Interviewer time
@@ -56,11 +62,14 @@
       Interviewer(3st)
     </label>
     <label>
-      <select v-model="selectedOption">
-        <option v-for="(option, index) in options" :key="index" :value="option.value">
-          {{ option.label }}
-        </option>
-      </select>
+      <el-select v-model="selectedOption" size="mini" multiple placeholder="请选择">
+        <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+        </el-option>
+      </el-select>
     </label>
     <label>
       Interviewer time
@@ -72,15 +81,10 @@
 
     <br>
 
-    <div class="buttons">
-      <button type="button" @click="onClickMoveButton(-1)">
-        <
-      </button>
-      <button type="button" @click="onClickMoveButton(1)">
-        >
-      </button>
-    </div>
+    <el-button type="info" size="mini" @click="onClickMoveButton(-1)"><</el-button>
+    <el-button type="info" size="mini" @click="onClickMoveButton(1)">></el-button>
     <span class="date-range">{{ dateRangeText }}</span>
+
     <ToastUICalendar
         ref="calendar"
         style="height: 800px"
@@ -117,12 +121,8 @@
     <h3>Interview Notification</h3>
 
     <div class="buttons-container">
-      <button type="button" @click="onClickMoveButton(-1)">
-        Confirm
-      </button>
-      <button type="button" @click="onClickMoveButton(1)">
-        Cancel
-      </button>
+      <el-button type="primary">Confirm</el-button>
+      <el-button type="primary">Cancel</el-button>
     </div>
 
   </div>
@@ -137,6 +137,7 @@ import 'tui-time-picker/dist/tui-time-picker.min.css';
 
 import {events} from './mock-data';
 import {theme} from './theme';
+import axios from 'axios';
 import './app.css';
 
 export default {
@@ -219,9 +220,9 @@ export default {
     },
     options() {
       return [
-        { value: '0', label: '程孝羽' },
-        { value: '1', label: '华东' },
-        { value: '2', label: '马子涛' },
+        {value: '0', label: '程孝羽'},
+        {value: '1', label: '华东'},
+        {value: '2', label: '马子涛'},
       ];
     }
   },
@@ -316,6 +317,22 @@ export default {
     onClickMoveButton(offset) {
       this.calendarInstance.move(offset);
       this.setDateRangeText();
+    },
+    getFeishuToken(offset) {
+      axios.get('http://127.0.0.1:7803/debug/copyDoc')
+          .then(response => {
+            console.log(response.data);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      axios.post('http://127.0.0.1:7803/debug/copyDocPost', {})
+          .then(response => {
+            console.log(response.data);
+          })
+          .catch(error => {
+            console.error(error);
+          });
     },
     setDateRangeText() {
       const date = this.calendarInstance.getDate();
