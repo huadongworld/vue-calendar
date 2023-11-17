@@ -1,131 +1,138 @@
 <template>
-  <div>
-    <h5>Interviewer type</h5>
-    <label>
-      <input type="radio" name="option" value="option1" v-model="selectedOption">
-      Lark video
-    </label>
-    <label>
-      <input type="radio" name="option" value="option2" v-model="selectedOption">
-      Other video
-    </label>
-    <label>
-      <input type="radio" name="option" value="option2" v-model="selectedOption">
-      On-site
-    </label>
+  <el-container>
+    <el-header>
+      <h5>Interviewer type</h5>
+      <el-radio v-model="radio" label="1">Lark video</el-radio>
+      <el-radio v-model="radio" label="2">Other video</el-radio>
+      <el-radio v-model="radio" label="3">On-site</el-radio>
+    </el-header>
+    <el-main>
+      <h5>Interviewer</h5>
+      <label>
+        Interviewer(1st)
+      </label>
+      <label>
+        <el-select v-model="selectedOption" style="margin-left: 10px;" size="mini" multiple placeholder="请选择">
+          <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+          </el-option>
+        </el-select>
+      </label>
+      <label style="margin-left: 50px;">
+        Interviewer time
+      </label>
+      <label>
+        <input content="abc">
+      </label>
+      <br>
 
-    <h5>Interviewer</h5>
+      <label>
+        Interviewer(2st)
+      </label>
+      <label>
+        <el-select v-model="selectedOption" style="margin-left: 10px;" size="mini" multiple placeholder="请选择">
+          <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+          </el-option>
+        </el-select>
+      </label>
+      <label style="margin-left: 50px;">
+        Interviewer time
+      </label>
+      <label>
+        <input content="abc">
+      </label>
+      <br>
 
-    <label>
-      Interviewer(1st)
-    </label>
-    <label>
-      <el-select v-model="selectedOption" size="mini" multiple placeholder="请选择">
-        <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-        </el-option>
-      </el-select>
-    </label>
-    <label>
-      Interviewer time
-    </label>
-    <label>
-      <input content="abc">
-    </label>
-    <br>
+      <label>
+        Interviewer(3st)
+      </label>
+      <label>
+        <el-select v-model="selectedOption" style="margin-left: 10px;" size="mini" multiple placeholder="请选择">
+          <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+          </el-option>
+        </el-select>
+      </label>
+      <label style="margin-left: 50px;">
+        Interviewer time
+      </label>
+      <label>
+        <input content="abc">
+      </label>
+      <br>
 
-    <label>
-      Interviewer(2st)
-    </label>
-    <label>
-      <el-select v-model="selectedOption" size="mini" multiple placeholder="请选择">
-        <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-        </el-option>
-      </el-select>
-    </label>
-    <label>
-      Interviewer time
-    </label>
-    <label>
-      <input content="abc">
-    </label>
-    <br>
+      <br>
 
-    <label>
-      Interviewer(3st)
-    </label>
-    <label>
-      <el-select v-model="selectedOption" size="mini" multiple placeholder="请选择">
-        <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-        </el-option>
-      </el-select>
-    </label>
-    <label>
-      Interviewer time
-    </label>
-    <label>
-      <input content="abc">
-    </label>
-    <br>
+      <el-button type="info" size="mini" @click="onClickMoveButton(-1)"><i class="el-icon-arrow-left"/></el-button>
+      <el-button type="info" size="mini" @click="onClickMoveButton(1)"><i class="el-icon-arrow-right"/></el-button>
+      <span class="date-range">{{ dateRangeText }}</span>
 
-    <br>
-
-    <el-button type="info" size="mini" @click="onClickMoveButton(-1)"><</el-button>
-    <el-button type="info" size="mini" @click="onClickMoveButton(1)">></el-button>
-    <span class="date-range">{{ dateRangeText }}</span>
-
-    <ToastUICalendar
-        ref="calendar"
-        style="height: 800px"
-        :view="'week'"
-        :use-form-popup="true"
-        :use-detail-popup="true"
-        :week="{
+      <ToastUICalendar
+          ref="calendar"
+          style="height: 800px"
+          :view="'week'"
+          :use-form-popup="true"
+          :use-detail-popup="true"
+          :week="{
         showTimezoneCollapseButton: false,
         timezonesCollapsed: false,
         eventView: true,
         taskView: false,
       }"
-        :month="{ startDayOfWeek: 1 }"
-        :timezone="{ zones }"
-        :theme="theme"
-        :template="{
+          :month="{ startDayOfWeek: 1 }"
+          :timezone="{ zones }"
+          :theme="theme"
+          :template="{
         milestone: getTemplateForMilestone,
         allday: getTemplateForAllday,
       }"
-        :grid-selection="true"
-        :calendars="calendars"
-        :events="events"
-        @selectDateTime="onSelectDateTime"
-        @beforeCreateEvent="onBeforeCreateEvent"
-        @beforeUpdateEvent="onBeforeUpdateEvent"
-        @beforeDeleteEvent="onBeforeDeleteEvent"
-        @afterRenderEvent="onAfterRenderEvent"
-        @clickDayName="onClickDayName"
-        @clickEvent="onClickEvent"
-        @clickTimezonesCollapseBtn="onClickTimezonesCollapseBtn"
-    />
+          :grid-selection="true"
+          :calendars="calendars"
+          :events="events"
+          @selectDateTime="onSelectDateTime"
+          @beforeCreateEvent="onBeforeCreateEvent"
+          @beforeUpdateEvent="onBeforeUpdateEvent"
+          @beforeDeleteEvent="onBeforeDeleteEvent"
+          @afterRenderEvent="onAfterRenderEvent"
+          @clickDayName="onClickDayName"
+          @clickEvent="onClickEvent"
+          @clickTimezonesCollapseBtn="onClickTimezonesCollapseBtn"
+      />
+    </el-main>
+    <el-footer>
+      <hr>
+      <h3>Interview Notification</h3>
 
-    <hr>
-    <h3>Interview Notification</h3>
+      <i class="el-icon-s-promotion"/>
+      <el-select size="mini" v-model="emailValue" placeholder="请选择">
+        <el-option
+            v-for="item in emailOptions"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+        </el-option>
+      </el-select>
 
-    <div class="buttons-container">
-      <el-button type="primary">Confirm</el-button>
-      <el-button type="primary">Cancel</el-button>
-    </div>
+      <div class="buttons-container">
+        <el-button type="primary" size="small">Confirm</el-button>
+        <el-button type="primary" size="small">Cancel</el-button>
+      </div>
 
-  </div>
+      <br>
+    </el-footer>
+  </el-container>
+
+
 </template>
 
 <script>
@@ -146,7 +153,16 @@ export default {
   },
   data() {
     return {
-      selectedOption: '',
+      selectedOption: ['0'],
+      radio: '1',
+      emailOptions: [{
+        value: '1',
+        label: 'Select email notification template'
+      }, {
+        value: '2',
+        label: 'Select email notification template2'
+      }],
+      emailValue: '1',
       calendars: [
         {
           id: '0',
