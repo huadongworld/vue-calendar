@@ -196,9 +196,8 @@ export default {
       events,
       zones: [
         {
-          timezoneName: 'Asia/Shanghai',
-          displayLabel: '北京',
-          tooltip: 'UTC+08:00',
+          timezoneName: 'Europe/London',
+          displayLabel: '伦敦'
         },
         {
           timezoneName: 'Asia/Shanghai',
